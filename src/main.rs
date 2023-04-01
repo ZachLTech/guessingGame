@@ -7,6 +7,7 @@ fn main() {
     println!("Guess the number!");
     let random_num = rand::thread_rng().gen_range(1..=100);
     let mut amount_tries = 0;
+    let mut won = 0;
     let mut amount_of_tries_max = String::new();
     println!("How many tries do you want?");
     io::stdin().read_line(&mut amount_of_tries_max).expect("Failed to read line");
@@ -33,10 +34,13 @@ fn main() {
         Ordering::Greater => println!("Too high"),
         Ordering::Equal => {
             println!("You Win!");
+            won = 1;
             break;
         }
     }
         amount_tries += 1
     }
-    println!("You Used all of your tries! Goodbye.");
+    if won == 0 {
+        println!("You Used all of your tries! Goodbye.");
+    }
 }
